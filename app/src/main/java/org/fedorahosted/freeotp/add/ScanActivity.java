@@ -35,6 +35,8 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import io.fotoapparat.Fotoapparat;
@@ -57,7 +59,12 @@ public class ScanActivity extends Activity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String text = intent.getStringExtra("scanResult");
-            addTokenAndFinish(text);
+            try {
+                addTokenAndFinish(text);
+            } catch (Exception e){
+                e.printStackTrace();
+//                Toast.makeText(getApplicationContext(), "Invalid QR Code", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -71,46 +78,48 @@ public class ScanActivity extends Activity {
         try {
             token = new Token(text);
         } catch (Token.TokenUriInvalidException e) {
-            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Invalid QR Code", Toast.LENGTH_SHORT).show();
         }
 
-        //do not receive any more broadcasts
-        this.unregisterReceiver(receiver);
+        if (token != null) {
+            //do not receive any more broadcasts
+            this.unregisterReceiver(receiver);
 
-        //check if token already exists
-        if (new TokenPersistence(ScanActivity.this).tokenExists(token)) {
-            finish();
-            return;
+            //check if token already exists
+            if (new TokenPersistence(ScanActivity.this).tokenExists(token)) {
+                finish();
+                return;
+            }
+
+            TokenPersistence.saveAsync(ScanActivity.this, token);
+            if (token.getImage() == null) {
+                finish();
+                return;
+            }
+
+            final ImageView image = (ImageView) findViewById(R.id.image);
+            Picasso.with(ScanActivity.this)
+                    .load(token.getImage())
+                    .placeholder(R.drawable.scan)
+                    .into(image, new Callback() {
+                        @Override
+                        public void onSuccess() {
+                            findViewById(R.id.progress).setVisibility(View.INVISIBLE);
+                            image.setAlpha(0.9f);
+                            image.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    finish();
+                                }
+                            }, 2000);
+                        }
+
+                        @Override
+                        public void onError() {
+                            finish();
+                        }
+                    });
         }
-
-        TokenPersistence.saveAsync(ScanActivity.this, token);
-        if (token == null || token.getImage() == null) {
-            finish();
-            return;
-        }
-
-        final ImageView image = (ImageView) findViewById(R.id.image);
-        Picasso.with(ScanActivity.this)
-                .load(token.getImage())
-                .placeholder(R.drawable.scan)
-                .into(image, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        findViewById(R.id.progress).setVisibility(View.INVISIBLE);
-                        image.setAlpha(0.9f);
-                        image.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                finish();
-                            }
-                        }, 2000);
-                    }
-
-                    @Override
-                    public void onError() {
-                        finish();
-                    }
-                });
     }
 
     @Override

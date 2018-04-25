@@ -159,8 +159,7 @@ public class MainActivity extends Activity implements OnMenuItemClickListener {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case PERMISSIONS_REQUEST_CAMERA: {
                 if (grantResults.length > 0

@@ -30,6 +30,7 @@ import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
 import android.net.Uri;
+import android.util.Log;
 
 import com.google.android.apps.authenticator.Base32String;
 import com.google.android.apps.authenticator.Base32String.DecodingException;
@@ -57,6 +58,7 @@ public class Token {
     private String imageAlt;
     private TokenType type;
     private String algo;
+    private String passwd; // Change dis name, future Gabriel. #dontforget
     private byte[] secret;
     private int digits;
     private long counter;
@@ -154,6 +156,12 @@ public class Token {
         }
 
         if (uri.getPath() == null) throw new TokenUriInvalidException();
+
+        // Prolly will be changed, but its good for a start
+        if (uri.getQueryParameter("passwd") == null) throw new TokenUriInvalidException();
+
+        Log.d("Dissect uri",
+                '\n' + uri.getScheme() + '\n' + uri.getAuthority() + '\n' + uri.getQueryParameter("passwd"));
     }
 
     private String getHOTP(long counter) {
