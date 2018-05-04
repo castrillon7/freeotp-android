@@ -63,7 +63,7 @@ public class ScanActivity extends Activity {
                 addTokenAndFinish(text);
             } catch (Exception e){
                 e.printStackTrace();
-//                Toast.makeText(getApplicationContext(), "Invalid QR Code", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), R.string.invalid_qr_code, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -78,7 +78,7 @@ public class ScanActivity extends Activity {
         try {
             token = new Token(text);
         } catch (Token.TokenUriInvalidException e) {
-            Toast.makeText(getApplicationContext(), "Invalid QR Code", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.invalid_qr_code, Toast.LENGTH_SHORT).show();
         }
 
         if (token != null) {

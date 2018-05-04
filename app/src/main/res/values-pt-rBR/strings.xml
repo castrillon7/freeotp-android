@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Arbi OTP</string>
+    <string name="about_copyright">© 2018 - SmartCyber</string>
+    <string name="delete_question">Deseja excluir esse token?</string>
+    <string name="delete">Excluir</string>
+    <string name="secret">Secret</string>
+    <string name="type">Tipo</string>
+    <string name="edit">Editar</string>
+    <string name="counter">Contador</string>
+    <string name="digits">Digitos</string>
+    <string name="scan_qr_code">Scanear QR code</string>
+    <string name="error_permission_camera_open">Sem permissão para abrir a câmera</string>
+    <string name="no_keys">Sem chaves OTP instaladas.</string>
+    <string name="save">Salvar</string>
+    <string name="code_copied">Token copiado para área de transferência.</string>
+    <string name="add_token">Adicionar Token</string>
+    <string name="interval">Intervalo</string>
+    <string name="error_image_open">Erro ao abrir a imagem!</string>
+    <string name="error_camera_open">Erro ao abrir a câmera!</string>
+    <string name="about_version">Arbi OTP Versão %1$s (%2$d)</string>
+    <string name="delete_summary">Se esse token for deletado, será perdido definitivamente. Deseja realmente deletá-lo?</string>
+    <string name="algorithm">Algoritimo</string>
+    <string name="restore_defaults">Restaurar padrões</string>
+    <string name="invalid_token">O token especificado é inválido.</string>
+    <string name="about_icons">Alguns dos ícones utilizados por essa aplicação foram criados e compartilhados pelo Projeto Android Open Source e são usados de acordo com os termos descritos na atribuição de licença Creative Commons 2.5.</string>
+    <string name="about_website">Para mais informações vejo o nosso %s.</string>
+    <string name="about_freeotp">Sobre o Arbi OTP</string>
+    <string name="about_license">Arbi OTP é um fork do <a href="http://freeotp.github.io">freeOTP</a>, que é licensiado pelo Apache 2.0 </string>
+    <string name="link_website"><a href="https://www.smartcyber.com.br">website</a></string>
+    <string name="link_apache2"><a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0</a></string>
+    <string name="invalid_qr_code">QR code inválido</string>
+</resources>

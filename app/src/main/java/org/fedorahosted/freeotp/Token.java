@@ -157,8 +157,8 @@ public class Token {
 
         if (uri.getPath() == null) throw new TokenUriInvalidException();
 
-        // Prolly will be changed, but its good for a start
-        if (uri.getQueryParameter("passwd") == null) throw new TokenUriInvalidException();
+        // Prolly will be changed, but its good for now
+//        if (uri.getQueryParameter("passwd") == null) throw new TokenUriInvalidException();
 
         Log.d("Dissect uri",
                 '\n' + uri.getScheme() + '\n' + uri.getAuthority() + '\n' + uri.getQueryParameter("passwd"));
